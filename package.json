@@ -1,0 +1,35 @@
+{
+  "name": "@local/appvector-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for AppVector APIs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+    "security-check": "npm audit && npm run check-secrets",
+    "check-secrets": "grep -r --exclude-dir=node_modules --exclude-dir=dist --exclude='*.lock' -E '(APPVECTOR_TOKEN|api_key|secret|password)\\s*=' . || true"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "bash -c 'if grep -E \"(APPVECTOR_TOKEN|api_key|secret|password)\\s*=\\s*[\\\"'][^\\\"\\']+\" \"$0\"; then echo \"ERROR: Hardcoded credentials found!\"; exit 1; fi'"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.4",
+    "@types/node": "^24.3.0",
+    "dotenv": "^17.2.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0"
+  }
+}
