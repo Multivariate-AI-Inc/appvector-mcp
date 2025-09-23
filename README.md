@@ -12,6 +12,7 @@ MCP server for accessing AppVector external APIs, providing app metadata and ran
 ## Installation
 
 ### Prerequisites
+
 - **Node.js 18 or higher** (Required by MCP SDK)
 - npm or yarn
 - Git (for version control)
@@ -21,17 +22,20 @@ MCP server for accessing AppVector external APIs, providing app metadata and ran
 ### Setup for AppVector mcp server
 
 1. Clone the repository (you must have access):
+
 ```bash
 git clone https://github.com/Multivariate-AI-Inc/appvector-mcp.git
 cd appvector-mcp
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Build the TypeScript code:
+
 ```bash
 npm run build
 ```
@@ -45,8 +49,8 @@ npm run build
      ```env
      APPVECTOR_TOKEN=your_api_token_here
      ```
-     
 5. Install pre-commit hooks for security:
+
 ```bash
 npm install
 npm run prepare
@@ -55,6 +59,7 @@ npm run prepare
 ### Add to Claude
 
 From the main MCP directory:
+
 ```bash
 
 # Replace <path-to-your-project> with the full path where your repo is located
@@ -63,12 +68,29 @@ claude mcp add appvector node <path-to-your-project>/appvector-mcp/dist/index.js
 
 ```
 
+### Add to Claude Desktop
+
+From the main MCP directory
+
+```
+"appvector-mcp": {
+      "command": "node",
+      "args": [
+        "<PROJECT_PATH>/dist/index.js"
+      ]
+    }
+```
+
+Replace `<PROJECT_PATH>` with AppVector MCP directory full path.
+
 ## Available Tools
 
 ### 1. `appvector_apple_metadata`
+
 Get Apple App Store metadata history.
 
 **Parameters:**
+
 - `app` (required): Apple app ID (e.g., "284882215")
 - `data`: Metadata type - title, description, media, genre, developer, ratings, price, version (default: "title")
 - `country`: Country code (default: "in")
@@ -77,18 +99,22 @@ Get Apple App Store metadata history.
 - `end_date`: YYYY-MM-DD format (default: today)
 
 ### 2. `appvector_apple_rank`
+
 Get Apple App Store category rank history.
 
 **Parameters:**
+
 - `app` (required): Apple app ID (e.g., "1386412985")
 - `country`: Country code (default: "in")
 - `start_date`: YYYY-MM-DD format (default: 30 days ago)
 - `end_date`: YYYY-MM-DD format (default: today)
 
 ### 3. `appvector_android_metadata`
+
 Get Google Play Store metadata history.
 
 **Parameters:**
+
 - `app` (required): Android package name (e.g., "com.spotify.music")
 - `data`: Metadata type - title, description, media, install, ratings, genre, developer, price, events, version (default: "title")
 - `country`: Country code (default: "in")
@@ -97,9 +123,11 @@ Get Google Play Store metadata history.
 - `end_date`: YYYY-MM-DD format (default: today)
 
 ### 4. `appvector_android_rank`
+
 Get Google Play Store category rank.
 
 **Parameters:**
+
 - `app` (required): Android package name (e.g., "com.spotify.music")
 - `country`: Country code (default: "in")
 - `start_date`: YYYY-MM-DD format (default: 30 days ago)
@@ -108,6 +136,7 @@ Get Google Play Store category rank.
 ## Usage Examples
 
 ### Get Apple app title history:
+
 ```
 Use tool: appvector_apple_metadata
 Arguments: {
@@ -118,6 +147,7 @@ Arguments: {
 ```
 
 ### Get Android app rankings:
+
 ```
 Use tool: appvector_android_rank
 Arguments: {
@@ -131,21 +161,25 @@ Arguments: {
 ## Development
 
 ### Run in development mode:
+
 ```bash
 npm run dev
 ```
 
 ### Build for production:
+
 ```bash
 npm run build
 ```
 
 ### Start production server:
+
 ```bash
 npm start
 ```
 
 ### Security check:
+
 ```bash
 npm run security-check
 ```
