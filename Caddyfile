@@ -1,0 +1,15 @@
+# Replace yourdomain.com with your actual domain
+yourdomain.com {
+    reverse_proxy /mcp* appvector-mcp:3000
+    
+    # Optional: Add basic headers for better compatibility
+    header {
+        # Enable CORS if needed
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type, Authorization"
+    }
+    
+    # Optional: Redirect root to MCP endpoint
+    redir / /mcp
+}

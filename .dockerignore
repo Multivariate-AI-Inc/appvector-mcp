@@ -1,0 +1,44 @@
+# Git
+.git
+.gitignore
+
+# Environment files
+.env
+.env.local
+.env.example
+
+# Virtual environments
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+docs/
+
+# Tests
+tests/
+test_*
+*_test.py
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
