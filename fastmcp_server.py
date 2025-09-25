@@ -209,6 +209,7 @@ async def appvector_android_rank(
     except Exception as e:
         return f"Error: Failed to fetch Android category ranks: {str(e)}"
 
+
 @mcp.tool()
 async def appvector_keyword_research(
     keywords: List[str],
@@ -236,8 +237,8 @@ async def appvector_keyword_research(
     }
     
     try:
-        # This endpoint might use POST
-        url = f"{API_URL}/keyword/research/"
+        # Use the correct endpoint format and POST method
+        url = f"{API_URL}/keyword-research/{platform}/"
         headers = {
             "Authorization": f"Token {token}",
             "Accept": "application/json",
@@ -346,10 +347,16 @@ async def appvector_apple_keyword_rank(
     if not token:
         return "Error: AppVector token not provided. Please add Authorization header with your token (e.g., 'Authorization: Token YOUR_TOKEN')."
     
+    # Validate required parameters
+    if not keywords or keywords.strip() == "":
+        return "Error: Keywords parameter is required and cannot be empty"
+    
+    # Use default date range (last 30 days) or provided dates
     date_range = get_default_date_range()
+    
     params = {
-        "app": app,
-        "keywords": keywords,
+        "app_id": app,
+        "keywords": keywords.strip(),
         "country": country,
         "language": language
     }
@@ -361,7 +368,7 @@ async def appvector_apple_keyword_rank(
         params["end_date"] = end_date or date_range["end_date"]
     
     try:
-        result = await make_api_request("/keyword/rank/apple/", token, params)
+        result = await make_api_request("/ranks/apple/", token, params)
         return str(result)
     except Exception as e:
         return f"Error: Failed to fetch Apple keyword ranks: {str(e)}"
@@ -391,10 +398,16 @@ async def appvector_android_keyword_rank(
     if not token:
         return "Error: AppVector token not provided. Please add Authorization header with your token (e.g., 'Authorization: Token YOUR_TOKEN')."
     
+    # Validate required parameters
+    if not keywords or keywords.strip() == "":
+        return "Error: Keywords parameter is required and cannot be empty"
+    
+    # Use default date range (last 30 days) or provided dates
     date_range = get_default_date_range()
+    
     params = {
-        "app": app,
-        "keywords": keywords,
+        "app_id": app,
+        "keywords": keywords.strip(),
         "country": country,
         "language": language
     }
@@ -406,11 +419,10 @@ async def appvector_android_keyword_rank(
         params["end_date"] = end_date or date_range["end_date"]
     
     try:
-        result = await make_api_request("/keyword/rank/android/", token, params)
+        result = await make_api_request("/ranks/android/", token, params)
         return str(result)
     except Exception as e:
         return f"Error: Failed to fetch Android keyword ranks: {str(e)}"
-
 @mcp.tool()
 async def appvector_user_jobs() -> str:
     """Retrieve all jobs created by the authenticated user, grouped into Android and iOS platforms with applied feature limits"""
@@ -419,7 +431,7 @@ async def appvector_user_jobs() -> str:
         return "Error: AppVector token not provided. Please add Authorization header with your token (e.g., 'Authorization: Token YOUR_TOKEN')."
     
     try:
-        result = await make_api_request("/user/jobs/", token, {})
+        result = await make_api_request("/userjobs/", token, {})
         return str(result)
     except Exception as e:
         return f"Error: Failed to fetch user jobs: {str(e)}"
