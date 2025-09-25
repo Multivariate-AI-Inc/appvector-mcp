@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
 import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
 import { AppleMetadataHandler } from './handlers/appleMetadata.js';
 import { AppleRankHandler } from './handlers/appleRank.js';
 import { AndroidMetadataHandler } from './handlers/androidMetadata.js';
@@ -419,9 +421,37 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
 // Start the server
 async function main() {
-  const transport = new StdioServerTransport();
+  const app = express();
+  const port = process.env.PORT || 3000;
+
+  // Enable CORS for all routes
+  app.use(cors());
+  
+  // Parse JSON bodies
+  app.use(express.json());
+  
+  // Health check endpoint
+  app.get('/health', (req, res) => {
+    res.json({ status: 'healthy', name: 'appvector-mcp', version: '1.0.0' });
+  });
+
+  // Create Streamable HTTP transport
+  const transport = new StreamableHTTPServerTransport({
+    sessionIdGenerator: () => `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+  });
   await server.connect(transport);
-  console.error('AppVector MCP server running on stdio');
+  
+  // Handle MCP requests on /mcp endpoint
+  app.all('/mcp', (req, res) => {
+    transport.handleRequest(req, res, req.body);
+  });
+  
+  // Start the HTTP server
+  app.listen(port, () => {
+    console.log(`AppVector MCP server running on port ${port}`);
+    console.log(`Health check: http://localhost:${port}/health`);
+    console.log(`MCP endpoint: http://localhost:${port}/mcp`);
+  });
 }
 
 main().catch((error) => {
