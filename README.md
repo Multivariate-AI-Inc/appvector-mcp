@@ -1,4 +1,4 @@
-AppVector MCP Server - ASO & App Store Analytics
+# AppVector MCP Server - ASO & App Store Analytics
 
 MCP server for accessing AppVector APIs, providing app metadata, ranking data, and ASO keyword research capabilities for Apple App Store and Google Play Store optimization.
 
