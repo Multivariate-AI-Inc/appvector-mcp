@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Package Management - uv vs pip</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Body */
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #e0e4ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* Mac Window Container */
+  .mac-window {
+    width: 900px;
+    max-width: 95%;
+    background: #2d2d2d;
+    border-radius: 14px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mac Top Bar */
+  .mac-top-bar {
+    background: linear-gradient(to bottom, #3b3b3b, #2d2d2d);
+    padding: 10px 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid #444;
+  }
+  .mac-top-bar .circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+  .circle.red { background: #ff5f56; }
+  .circle.yellow { background: #ffbd2e; }
+  .circle.green { background: #27c93f; }
+
+  /* Terminal Area */
+  .terminal {
+    background: #1c1c1c;
+    color: #f8f8f2;
+    padding: 30px 40px;
+    line-height: 1.7;
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Section Styling */
+  .section {
+    margin-bottom: 30px;
+    padding: 15px 20px;
+    border-left: 4px solid #61dafb;
+    background: #272727;
+    border-radius: 8px;
+  }
+
+  .section-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #61dafb;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Command Styling */
+  .command {
+    color: #50fa7b;
+    font-weight: 500;
+    display: block;
+    margin: 6px 0;
+  }
+
+  /* Info/Description Styling */
+  .info {
+    color: #f1fa8c;
+    margin-left: 20px;
+    font-size: 15px;
+  }
+
+  /* Highlight Keywords */
+  .highlight {
+    color: #ff79c6;
+    font-weight: 600;
+  }
+
+  /* Code Styling */
+  code {
+    background: #2c2c2c;
+    color: #f8f8f2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 15px;
+  }
+
+  /* Cursor Effect */
+  .cursor::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 18px;
+    background: #f8f8f2;
+    margin-left: 4px;
+    animation: blink 1s steps(2, start) infinite;
+    vertical-align: bottom;
+  }
+
+  @keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .terminal {
+      padding: 20px;
+      font-size: 14px;
+    }
+    .section-title {
+      font-size: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="mac-window">
+  <div class="mac-top-bar">
+    <div class="circle red"></div>
+    <div class="circle yellow"></div>
+    <div class="circle green"></div>
+  </div>
+
+  <div class="terminal">
+    <!-- Traditional Workflow -->
+    <div class="section">
+      <div class="section-title">Traditional Python Workflow</div>
+      <span class="command">$ mkdir my_project && cd my_project</span>
+      <span class="command">$ python -m venv env</span>
+      <span class="command">$ source env/bin/activate</span>
+      <span class="command">$ pip install package_name</span>
+      <div class="info">✅ Manual, repetitive, prone to dependency conflicts.</div>
+    </div>
+
+    <!-- uv Workflow -->
+    <div class="section">
+      <div class="section-title">Modern Workflow with <span class="highlight">uv</span></div>
+      <span class="command">$ uv init fast-mcp -p 3.10 <span class="cursor"></span></span>
+      <div class="info">✔ Creates project directory with Python 3.10 environment.</div>
+      <span class="command">$ uv pip install package_name</span>
+      <div class="info">✔ Installs package inside uv-managed environment.</div>
+      <span class="command">$ uv add package_name</span>
+      <div class="info">✔ Smart install + tracks dependencies automatically for reproducible projects.</div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="section">
+      <div class="section-title">Quick Comparison</div>
+      <div class="info">
+        <span class="highlight">pip:</span> Manual install, no env management, no dependency tracking.<br>
+        <span class="highlight">uv pip:</span> pip inside uv environment, ensures isolation.<br>
+        <span class="highlight">uv add:</span> Smart install + automatic tracking + reproducibility.
+      </div>
+    </div>
+
+    <!-- Key Takeaway -->
+    <div class="section">
+      <div class="section-title">Key Takeaway</div>
+      <div class="info">Less setup, cleaner environments, more coding. Modern Python workflow simplified! 🚀</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
