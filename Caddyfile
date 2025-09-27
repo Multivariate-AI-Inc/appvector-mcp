@@ -29,3 +29,18 @@ gamma-mcp.example.com {
     redir / /mcp
 }
 
+semrush-mcp.example.com {
+    reverse_proxy /mcp* semrush-mcp:3001
+    
+    # Optional: Add basic headers for better compatibility
+    header {
+        # Enable CORS if needed
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type, Authorization"
+    }
+    
+    # Optional: Redirect root to MCP endpoint
+    redir / /mcp
+}
+
