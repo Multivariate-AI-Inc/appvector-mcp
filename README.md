@@ -1,10 +1,12 @@
-# AppVector MCP Server - ASO & App Store Analytics
+# AppVector MCP Server For ASO Tools
 
 MCP server for accessing AppVector APIs, providing app metadata, ranking data, and ASO keyword research capabilities for Apple App Store and Google Play Store optimization.
 
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)](https://www.typescriptlang.org)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-orange)](https://modelcontextprotocol.io)
+[![License](https://img.shields.io/badge/License-Proprietary-red)](./LICENSE)
+[![Free to Use](https://img.shields.io/badge/Access-AppVector%20Account-green)](https://appvector.io)
 
 ## Features
 
@@ -185,6 +187,7 @@ npm run security-check
 2. **Network errors**: Check API URL and network connectivity
 3. **Invalid parameters**: Ensure app IDs and country codes are valid
 4. **Date errors**: Dates must be in YYYY-MM-DD format, no future dates allowed
+5. **Pre-commit failures**: Run `npm run security-check` to identify issues
 6. **Environment not loading**: Check ENV_PATH or use default location
 
 ## ASO Best Practices
@@ -207,6 +210,27 @@ This MCP server provides standardized access to AppVector's ASO tools and app st
 - Multi-platform support (iOS and Android)
 - Configurable date ranges and localization options
 - Structured JSON responses for easy integration
+
+## Usage & Access
+
+This MCP server is **free to use** with a valid AppVector account. API limits and features depend on your active AppVector plan.
+
+**Copyright © 2025 Multivariate AI Private Limited. All rights reserved.**
+
+### Getting Started
+
+1. **Sign up for AppVector**: [appvector.io](https://appvector.io)
+2. **Get your API token**: [appvector.io/users/get_token/](https://appvector.io/users/get_token/)
+3. **Configure the MCP server** with your token
+4. **Start using ASO tools** based on your plan limits
+
+### AppVector Plans
+
+- **Free Plan**: Basic ASO keyword research and limited API calls
+- **Pro Plan**: Advanced features and higher API limits
+- **Enterprise Plan**: Full access and unlimited API usage
+
+**Note**: API usage limits and available features are determined by your active AppVector subscription plan.
 
 ---
 
