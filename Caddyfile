@@ -44,3 +44,18 @@ semrush-mcp.example.com {
     redir / /mcp
 }
 
+mattermost-mcp.example.com {
+    reverse_proxy /mcp* mattermost-mcp:3002
+    
+    # Optional: Add basic headers for better compatibility
+    header {
+        # Enable CORS if needed
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type, Authorization"
+    }
+    
+    # Optional: Redirect root to MCP endpoint
+    redir / /mcp
+}
+
