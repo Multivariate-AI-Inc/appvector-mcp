@@ -59,3 +59,18 @@ mattermost-mcp.example.com {
     redir / /mcp
 }
 
+superset-mcp.example.com {
+    reverse_proxy /mcp* superset-mcp:8001
+    
+    # Optional: Add basic headers for better compatibility
+    header {
+        # Enable CORS if needed
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type, Authorization, X-Superset-URL, X-Superset-Username, X-Superset-Password"
+    }
+    
+    # Optional: Redirect root to MCP endpoint
+    redir / /mcp
+}
+
